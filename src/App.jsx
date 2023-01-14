@@ -16,17 +16,15 @@ export default function App() {
 
   function changeQuote() {
     setQuote(quotes[Math.floor(Math.random() * quotes.length)])
-    console.log("called")
-    console.log(quote);
   }
 
   return (
     <div className="container">
-      <h1>Quotes App</h1>
-        <div className="div">
+      <h1 className="title">Quotes App</h1>
+        <div className="quote-container">
             <div className="button" onClick={changeQuote} >Next Quote</div>
-            <p className="quote">{quote?.text}</p>
-            <h4 className="author">{quote?.author}</h4>
+            <p className="quote">"{quote?.text}"</p>
+            <h4 className="author">"{quote?.author}</h4>
         </div>
     </div>
   )
