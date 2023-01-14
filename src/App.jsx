@@ -1,26 +1,33 @@
 import React from "react";
-import Quote from "./components/Quote";
 
 export default function App() {
   const [quotes, setQuotes] = React.useState([]);
-  const [quote, setQuote] = React.useState("");
+  const [quote, setQuote] = React.useState(null);
+
 
   React.useEffect(() => {
     fetch("https://type.fit/api/quotes")
       .then(res => res.json())
-      .then(data => setQuotes(data))
+      .then(data => {
+        setQuotes(data);
+        setQuote(data[0])
+      });
   }, [])
 
   function changeQuote() {
-    const randomNum = Math.floor(Math.random *= 1640);
-    setQuote(quotes[randomNum])
+    setQuote(quotes[Math.floor(Math.random() * quotes.length)])
+    console.log("called")
+    console.log(quote);
   }
 
-  console.log(quotes.length)
   return (
     <div className="container">
       <h1>Quotes App</h1>
-      {quote ? <Quote quote={quote} handleClick={changeQuote} /> : <div>loading</div>}
+        <div className="div">
+            <div className="button" onClick={changeQuote} >Next Quote</div>
+            <p className="quote">{quote?.text}</p>
+            <h4 className="author">{quote?.author}</h4>
+        </div>
     </div>
   )
 }
